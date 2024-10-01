@@ -20,28 +20,28 @@ const transporter = nodemailer.createTransport({
 
 // API Endpoint for email verification
 app.post('/verify-email', async(req, res) => {
-    const { email, name } = req.body;
+    const { email, name, domain } = req.body;
     
 
     // Generate a verification link (you can customize this)
-    const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(email)}`;
+    const verificationLink = `${domain}/verify?email=${encodeURIComponent(email)}`;
 
     // Email options
     const mailOptions = {
-        from: 'nado.gemini62@gmail.com',
+        from: '"FMS 👻" nado.gemini62@gmail.com',
         to: email,
         subject: 'Email Verification',
         text: `Hi ${name}!
-            Thank you for signing up! To complete your registration, we’ve sent a verification link to your email address. Please check your inbox (and your spam folder, just in case) for an email from us.
-            Simply click the link in the email to verify your address and activate your account. This step helps us ensure that your account is secure and that we can communicate important updates with you.
-            If you don’t see the email within a few minutes, feel free to request another verification link.
-            Thank you for being a part of our community!
+        Thank you for signing up! To complete your registration, we’ve sent a verification link to your email address. Please check your inbox (and your spam folder, just in case) for an email from us.
+        Simply click the link in the email to verify your address and activate your account. This step helps us ensure that your account is secure and that we can communicate important updates with you.
+        If you don’t see the email within a few minutes, feel free to request another verification link.
+        Thank you for being a part of our community!
 
-            \n\nPlease verify your email by clicking the link: ${verificationLink}\n
+        \n\nPlease verify your email by clicking the link: ${verificationLink}\n
 
-            Best regards,
-            [Your Company Name]
-            Feel free to customize the text to better fit your brand's voice or specific requirements!`,
+        Best regards,
+        FMS Company
+        Feel free to customize the text to better fit your brand's voice or specific requirements!`,
     };
 
     // Send email
@@ -56,7 +56,7 @@ app.post('/verify-email', async(req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('~~~ New Hello world ~~~');
+    res.send('~~~ update ~~~');
 });
 
 // Start the server
