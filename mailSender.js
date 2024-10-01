@@ -10,11 +10,11 @@ app.use(bodyParser.json());
 
 // Configure Nodemailer
 const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
+    host: 'smtp.gmail.com',
     port: 587,
     auth: {
-        user: 'norwood.stokes@ethereal.email',
-        pass: 'eaxjvTj8edAdu2sq6W'
+        user: 'nado.gemini62@gmail.com',
+        pass: 'dqabqknhecjyzgtr'
     }
 });
 
@@ -28,7 +28,7 @@ app.post('/verify-email', async(req, res) => {
 
     // Email options
     const mailOptions = {
-        from: 'norwood.stokes@ethereal.email',
+        from: 'nado.gemini62@gmail.com',
         to: email,
         subject: 'Email Verification',
         text: `Please verify your email by clicking on the following link: ${verificationLink}`
@@ -46,7 +46,7 @@ app.post('/verify-email', async(req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('~~~ Hello world ~~~');
+    res.send('~~~ New Hello world ~~~');
 });
 
 // Start the server
