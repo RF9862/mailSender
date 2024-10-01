@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 // API Endpoint for email verification
 app.post('/verify-email', (req, res) => {
     const { email } = req.body;
-    return res.json({message: email})
+    res.status(200).json({ statusCode: 200, message: 'User registered successfully. Verification email sent.' });
 
     // // Generate a verification link (you can customize this)
     // const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(email)}`;
@@ -44,7 +44,7 @@ app.post('/verify-email', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello world');
+    res.send('Hello world!!!');
 });
 
 // Start the server
