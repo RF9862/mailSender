@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 // Middleware
 app.use(bodyParser.json());
@@ -19,32 +19,34 @@ const transporter = nodemailer.createTransport({
 });
 
 // API Endpoint for email verification
-app.post('/verify-email', (req, res) => {
+app.post('/verify-email', async(req, res) => {
     const { email } = req.body;
-    res.status(200).json({ statusCode: 200, message: 'User registered successfully. Verification email sent.' });
+    
 
-    // // Generate a verification link (you can customize this)
-    // const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(email)}`;
+    // Generate a verification link (you can customize this)
+    const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(email)}`;
 
-    // // Email options
-    // const mailOptions = {
-    //     from: 'norwood.stokes@ethereal.email',
-    //     to: email,
-    //     subject: 'Email Verification',
-    //     text: `Please verify your email by clicking on the following link: ${verificationLink}`
-    // };
+    // Email options
+    const mailOptions = {
+        from: 'norwood.stokes@ethereal.email',
+        to: email,
+        subject: 'Email Verification',
+        text: `Please verify your email by clicking on the following link: ${verificationLink}`
+    };
 
-    // // Send email
-    // transporter.sendMail(mailOptions, (error, info) => {
-    //     if (error) {
-    //         return res.status(500).json({ success: false, message: 'Error sending email' });
-    //     }
-    //     return res.json({ success: true, message: 'Verification email sent' });
-    // });
+    // Send email
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log("======>");
+        res.status(200).json({ statusCode: 200, message: 'User registered successfully. Verification email sent.' });
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).json({ statusCode: 500, message: 'Error sending verification email.' });
+    }
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello world!!!');
+    res.send('~~~ Hello world ~~~');
 });
 
 // Start the server
