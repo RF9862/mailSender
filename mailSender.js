@@ -21,25 +21,26 @@ const transporter = nodemailer.createTransport({
 // API Endpoint for email verification
 app.post('/verify-email', (req, res) => {
     const { email } = req.body;
+    return res.json({message: email})
 
-    // Generate a verification link (you can customize this)
-    const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(email)}`;
+    // // Generate a verification link (you can customize this)
+    // const verificationLink = `http://yourdomain.com/verify?email=${encodeURIComponent(email)}`;
 
-    // Email options
-    const mailOptions = {
-        from: 'norwood.stokes@ethereal.email',
-        to: email,
-        subject: 'Email Verification',
-        text: `Please verify your email by clicking on the following link: ${verificationLink}`
-    };
+    // // Email options
+    // const mailOptions = {
+    //     from: 'norwood.stokes@ethereal.email',
+    //     to: email,
+    //     subject: 'Email Verification',
+    //     text: `Please verify your email by clicking on the following link: ${verificationLink}`
+    // };
 
-    // Send email
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return res.status(500).json({ success: false, message: 'Error sending email' });
-        }
-        return res.json({ success: true, message: 'Verification email sent' });
-    });
+    // // Send email
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //     if (error) {
+    //         return res.status(500).json({ success: false, message: 'Error sending email' });
+    //     }
+    //     return res.json({ success: true, message: 'Verification email sent' });
+    // });
 });
 
 // Start the server
